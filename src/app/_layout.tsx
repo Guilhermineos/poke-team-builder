@@ -1,18 +1,30 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Tabs } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function Layout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <Tabs screenOptions={{ tabBarActiveTintColor: '#e3350d' }}>
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Pokédex',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="pokeball" size={24} color={color as string} />,
+        }}
+      />
+      <Tabs.Screen
+        name="time"
+        options={{
+          title: 'Meu Time',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="star-circle" size={24} color={color as string} />,
+        }}
+      />
+      <Tabs.Screen
+        name="perfil"
+        options={{
+          title: 'Treinador',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account" size={24} color={color as string} />,
+        }}
+      />
+    </Tabs>
   );
 }
